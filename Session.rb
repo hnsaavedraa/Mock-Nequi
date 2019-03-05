@@ -1,7 +1,7 @@
-class Session 
+class Session
     attr_reader :idUser, :nameUser
-    def initialize(conexion)
-        @conexion = conexion
+    def initialize(sql)
+        @conexion = sql
         @idUser   = nil
         @nameUser = nil
     end
