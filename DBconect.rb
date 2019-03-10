@@ -25,18 +25,3 @@ class DBconect
   end
 end
 
-# obj = DBconect.new();
-#  obj.query("SELECT a.balance FROM accounts a WHERE a.iduser = 4 AND type_account = 'ahorros'").each do |d|
-#
-# puts d
-#    end
-  # results.each do |row|
-  #   puts row["iduser"]
-  #   puts row["name_user"]
-  #   puts row["email"]
-  #   puts row["pass"]
-  #
-  #   if row["dne"]  # non-existant hash entry is nil
-  #     puts row["dne"]
-  #   end
-  # end
