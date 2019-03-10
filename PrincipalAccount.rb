@@ -21,11 +21,13 @@ attr_accessor :balance_principal,:balance_mattress
   end
   def deposit_mattress(value)
     @mysql_obj.query("CALL movement_accounts(#{@id},account_id(#{@id}, 'colchon'),#{value*(-1)});")
+    update_principal_value()
     update_matrress_value()
   end
 
   def retire_mattress(value)
     @mysql_obj.query("CALL movement_accounts(#{@id}, account_id(#{@id},'colchon'),#{value});")
+    update_principal_value()
     update_matrress_value()
   end
 
@@ -41,11 +43,13 @@ attr_accessor :balance_principal,:balance_mattress
     end
   end
 
-    def depositToUser(email,value)
+  def depositToUser(email,value)
       @mysql_obj.query("CALL tranfer_to_account(account_id(#{@id}, 'ahorros'), '#{email}',#{value});")
   end
 
-
+  def movement_history()
+    puts "super historial de movmientos"
+  end
 
 
 
