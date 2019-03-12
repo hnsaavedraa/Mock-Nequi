@@ -20,7 +20,7 @@ when "1"
   pass = gets.chomp()
   session.registerUser(name, email, pass)
   session.login(email, pass)
-  menu = Menu.new(session.idUser,sql)
+  menu = Menu.new(session,sql)
   menu.run()
 
 when "2"
@@ -28,7 +28,11 @@ when "2"
   email = gets.chomp()
   puts "Ingrese Contraseña "
   pass = gets.chomp()
-  session.login(email, pass)
-  menu = Menu.new(session.idUser,sql)
-  menu.run()
+  result = session.login(email, pass)
+  if session.idUser == nil
+    puts result
+  else 
+    menu = Menu.new(session,sql)
+    menu.run()
+  end
 end
