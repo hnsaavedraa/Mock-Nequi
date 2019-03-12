@@ -1,7 +1,7 @@
 require "Mysql2"
 require "json"
 
-$db     = (JSON.parse(File.read('config.json')))['db']
+$db  = (JSON.parse(File.read('config.json')))['db']
 
 # class that controls the connection and queries the database
 class DBconect
@@ -24,4 +24,3 @@ class DBconect
     @mysql_obj.close
   end
 end
-

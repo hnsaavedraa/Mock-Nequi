@@ -65,7 +65,7 @@ class Menu
         gets.chomp
 
       when "5"
-        run_mattress() 
+        run_mattress()
       when "6"
         run_pocket()
       when "7"
@@ -76,7 +76,7 @@ class Menu
     end #while principal
   end #run
 
-  def run_mattress() 
+  def run_mattress()
     while true
 
       system "clear" or system "cls"
@@ -107,7 +107,7 @@ class Menu
     end #while principal
   end # run_mattress
 
-  def run_pocket() 
+  def run_pocket()
     while true
 
       system "clear" or system "cls"
@@ -116,29 +116,67 @@ class Menu
            "▒▒▒▒▒ ▒             Mock-Nequi 💰💰💰            ▒ ▒▒▒▒▒" ,
            ""
       puts  "Ahora esta en tus Bolsillos",
-            "*FALTA TABLA CON LOS BOLSILLOS*",
+            "Bolsillos actuales :"
+            @pockets.listPocket()
+    puts    "*FALTA TABLA CON LOS BOLSILLOS*",
             "Que deseas hacer?",
             "1.Crear Bolsillo",
             "2.Eliminar bolsillo",
             "3.Agregar dinero a bolsillo",
             "4.retirar dinero de bolsillo",
             "5.Enviar dinero a usuario por email",
-            "9.volver"
+            "6.volver"
 
       desition = gets.chomp
       case desition
       when "1"
-        puts "*logica para crear un bolsillo*"
-        value = gets.chomp.to_i
-        gets.chomp
+        puts "ingresa nombre del bolsillo"
+  namepocket= gets.chomp
+  @pockets.createPocket(namepocket)
+        @pockets.listPocket()
+when"2"
+  puts "Ingresa el numero del bolsillo que deseas eliminar"
+  @pockets.listPocket()
+  todelete = gets.chomp().to_i
+  @pockets.deletePocket(@pockets.returnpocket(todelete))
 
-      when"9"
+
+when"3"
+  puts "Ingresa el numero del bolsillo al que deseas agregar dinero"
+  @pockets.listPocket()
+  pockettarget = gets.chomp()
+  puts "Ingresa el monto a depositar"
+  value = gets.chomp()
+  @pockets.depositPocket(@pockets.returnpocket(pockettarget),value)
+
+
+when"4"
+
+  puts "Ingresa el numero del bolsillo del que deseas retirar dinero"
+  @pockets.listPocket()
+  pockettarget = gets.chomp().to_i
+  puts "Ingresa el monto a retirar"
+  value = gets.chomp().to_i
+  @pockets.retirePocket(@pockets.returnpocket(pockettarget).to_i,value)
+
+when"5"
+  puts "Ingresa el numero del bolsillo del que deseas enviar dinero"
+  @pockets.listPocket()
+  pockettarget = gets.chomp().to_i
+  puts "ingresa email usuario destino"
+  email = gets.chomp()
+  puts "ingresa valor a depositar "
+  valuedeposit = gets.chomp().to_i
+  @pockets.depositToUser(@pockets.returnpocket(pockettarget),email,valuedeposit)
+
+
+when"6"
         break
       end
     end #while principal
   end # run_pocket
-  
-  def run_goal() 
+
+  def run_goal()
     while true
 
       system "clear" or system "cls"
@@ -151,7 +189,7 @@ class Menu
             "Que deseas hacer?",
             "1.Crear Meta",
             "2.Cerrar Meta",
-            "3.Agredar dinero a meta",
+            "3.Agregar dinero a meta",
             "9.volver"
 
       desition = gets.chomp
@@ -166,5 +204,3 @@ class Menu
   end # run_goal
 
 end # class
-
-
