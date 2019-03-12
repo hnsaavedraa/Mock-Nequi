@@ -41,10 +41,12 @@ attr_accessor :balance_principal,:balance_mattress
     @mysql_obj.query("SELECT a.balance FROM accounts a WHERE a.iduser = #{@id} AND a.type_account = 'colchon'").each do |row|
      @balance_mattress = row["balance"]
     end
+
   end
 
   def depositToUser(email,value)
       @mysql_obj.query("CALL tranfer_to_account(account_id(#{@id}, 'ahorros'), '#{email}',#{value});")
+      update_principal_value()
   end
 
   def movement_history()
