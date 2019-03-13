@@ -118,8 +118,7 @@ class Menu
       puts  "Ahora esta en tus Bolsillos",
             "Bolsillos actuales :"
             @pockets.listPocket()
-    puts    "*FALTA TABLA CON LOS BOLSILLOS*",
-            "Que deseas hacer?",
+            puts"Que deseas hacer?",
             "1.Crear Bolsillo",
             "2.Eliminar bolsillo",
             "3.Agregar dinero a bolsillo",
@@ -185,8 +184,9 @@ when"6"
            "▒▒▒▒▒ ▒             Mock-Nequi 💰💰💰            ▒ ▒▒▒▒▒" ,
            ""
       puts  "Ahora estas en tus metas",
-            "*poner listado de metas*",
-            "Que deseas hacer?",
+            "Metas actuales"
+            @goals.listGoal()
+      puts  "Que deseas hacer?",
             "1.Crear Meta",
             "2.Cerrar Meta",
             "3.Agregar dinero a meta",
@@ -195,8 +195,27 @@ when"6"
       desition = gets.chomp
       case desition
       when "1"
-        puts "crear meta"
-        gets.chomp
+        puts "ingresa nombre de la meta"
+        namegoal = gets.chomp
+        puts "ingresa valor de la meta"
+        valuegoal = gets.chomp.to_i
+        puts "ingresa fecha limite (formato YYYY-MM-DD)"
+        dategoal = gets.chomp
+        @goals.createGoal(namegoal,valuegoal,dategoal)
+      when "2"
+        puts "Ingresa el numero de la meta que deseas eliminar"
+        @goals.listGoal()
+        todelete = gets.chomp().to_i
+        @goals.deleteGoal(@goals.returnGoal(todelete))
+
+      when "3"
+        puts "Ingresa el numero de la meta a la que deseas agregar dinero"
+        @goals.listGoal()
+        goaltarget = gets.chomp().to_i
+        puts "Ingresa el monto a depositar"
+        value = gets.chomp().to_i
+        @goals.depositGoal(@goals.returnGoal(goaltarget),value)
+
       when"9"
         break
       end
