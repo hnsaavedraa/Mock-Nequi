@@ -21,6 +21,8 @@ class Menu
 
       system "clear" or system "cls"
 
+@principal.update_principal_value()
+
       puts "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" ,
            "▒▒▒▒▒ ▒             Mock-Nequi 💰💰💰            ▒ ▒▒▒▒▒" ,
            ""
@@ -45,13 +47,13 @@ class Menu
         puts "Cuando dinero desea ingresar a la cuenta de ahorros?"
         value = gets.chomp.to_i
         @principal.deposit_principal(value)
-        puts "actualmente en cuenta de ahorros: #{@principal.balance_principal}"
         gets.chomp
+
       when "2"
         puts "Cuando dinero desea retirar de la cuenta de ahorros?"
+        puts "actualmente en cuenta de ahorros: #{@principal.balance_principal}"
         value = gets.chomp.to_i
         @principal.retire_principal(value)
-        puts "actualmente en cuenta de ahorros: #{@principal.balance_principal}"
         gets.chomp
       when "3"
         puts "ingresa email usuario destino"
@@ -59,7 +61,7 @@ class Menu
         puts "ingresa valor a depositar "
         valuedeposit = gets.chomp().to_i
         @principal.depositToUser(email,valuedeposit)
-
+        gets.chomp
       when "4"
         @principal.movement_history()
         gets.chomp
@@ -141,13 +143,14 @@ when"2"
 
 
 when"3"
+  @principal.update_principal_value
   puts "Ingresa el numero del bolsillo al que deseas agregar dinero"
   @pockets.listPocket()
   pockettarget = gets.chomp()
   puts "Ingresa el monto a depositar"
   value = gets.chomp()
-  @pockets.depositPocket(@pockets.returnpocket(pockettarget),value)
-
+  @pockets.depositPocket(@pockets.returnpocket(pockettarget),value,@principal.balance_principal.to_i)
+  gets.chomp()
 
 when"4"
 
@@ -156,7 +159,8 @@ when"4"
   pockettarget = gets.chomp().to_i
   puts "Ingresa el monto a retirar"
   value = gets.chomp().to_i
-  @pockets.retirePocket(@pockets.returnpocket(pockettarget).to_i,value)
+  @pockets.retirePocket(@pockets.returnpocket(pockettarget).to_i,value,@pockets.returndepositpocket(pockettarget))
+  gets.chomp()
 
 when"5"
   puts "Ingresa el numero del bolsillo del que deseas enviar dinero"
@@ -167,6 +171,7 @@ when"5"
   puts "ingresa valor a depositar "
   valuedeposit = gets.chomp().to_i
   @pockets.depositToUser(@pockets.returnpocket(pockettarget),email,valuedeposit)
+  gets.chomp()
 
 
 when"6"
@@ -202,20 +207,22 @@ when"6"
         puts "ingresa fecha limite (formato YYYY-MM-DD)"
         dategoal = gets.chomp
         @goals.createGoal(namegoal,valuegoal,dategoal)
+        gets.chomp()
       when "2"
         puts "Ingresa el numero de la meta que deseas eliminar"
         @goals.listGoal()
         todelete = gets.chomp().to_i
         @goals.deleteGoal(@goals.returnGoal(todelete))
-
+        gets.chomp()
       when "3"
         puts "Ingresa el numero de la meta a la que deseas agregar dinero"
+        @principal.update_principal_value
         @goals.listGoal()
         goaltarget = gets.chomp().to_i
         puts "Ingresa el monto a depositar"
         value = gets.chomp().to_i
-        @goals.depositGoal(@goals.returnGoal(goaltarget),value)
-
+        @goals.depositGoal(@goals.returnGoal(goaltarget),value,@principal.balance_principal,@goals.returnmaxGoal(goaltarget),@goals.returnbalanceGoal(goaltarget))
+        gets.chomp()
       when"9"
         break
       end
