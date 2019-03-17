@@ -202,6 +202,13 @@ when"6"
         namegoal = gets.chomp
         puts "ingresa valor de la meta"
         valuegoal = gets.chomp.to_i
+        if valuegoal <= 0
+            puts "debe ingresar un valor valido, presione enter para volver a empezar"
+            gets.chomp
+            next
+        else
+          
+        end
         puts "ingresa fecha limite (formato YYYY-MM-DD)"
         dategoal = gets.chomp
 
