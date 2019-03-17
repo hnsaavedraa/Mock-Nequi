@@ -84,7 +84,7 @@ class Menu
       system "clear" or system "cls"
 
       puts "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" ,
-           "▒▒▒▒▒ ▒             Mock-Nequi 💰💰💰            ▒ ▒▒▒▒▒" ,
+           "▒▒▒▒▒ ▒        Mock-Nequi - Colchon💰💰💰        ▒ ▒▒▒▒▒" ,
            ""
       puts  "Guardado en Colchon  :#{@principal.balance_mattress}",
             "",
@@ -115,10 +115,9 @@ class Menu
       system "clear" or system "cls"
 
       puts "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" ,
-           "▒▒▒▒▒ ▒             Mock-Nequi 💰💰💰            ▒ ▒▒▒▒▒" ,
+           "▒▒▒▒▒ ▒       Mock-Nequi - Bolsillos💰💰💰       ▒ ▒▒▒▒▒" ,
            ""
-      puts  "Ahora esta en tus Bolsillos",
-            "Bolsillos actuales :"
+      puts  "Bolsillos actuales :"
             @pockets.listPocket()
             puts"Que deseas hacer?",
             "1.Crear Bolsillo",
@@ -186,10 +185,9 @@ when"6"
       system "clear" or system "cls"
 
       puts "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" ,
-           "▒▒▒▒▒ ▒             Mock-Nequi 💰💰💰            ▒ ▒▒▒▒▒" ,
+           "▒▒▒▒▒ ▒       Mock-Nequi - Tus Metas 💰💰💰      ▒ ▒▒▒▒▒" ,
            ""
-      puts  "Ahora estas en tus metas",
-            "Metas actuales"
+      puts  "Metas actuales"
             @goals.listGoal()
       puts  "Que deseas hacer?",
             "1.Crear Meta",
@@ -206,8 +204,18 @@ when"6"
         valuegoal = gets.chomp.to_i
         puts "ingresa fecha limite (formato YYYY-MM-DD)"
         dategoal = gets.chomp
-        @goals.createGoal(namegoal,valuegoal,dategoal)
-        gets.chomp()
+
+        if ( dategoal =~ /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/ and dategoal.length == 10)
+          if Date.parse(dategoal) > Date.today
+              @goals.createGoal(namegoal,valuegoal,dategoal)
+          else
+              puts "La fecha debe ser superior a hoy, presione enter para volver a empezar"
+
+          end
+        else
+            puts "El formado de fecha debe ser YYYY-MM-DD, presione enter para volver a empezar"
+        end
+        gets.chomp()  
       when "2"
         puts "Ingresa el numero de la meta que deseas eliminar"
         @goals.listGoal()
