@@ -19,13 +19,16 @@ class Pocket
       message = ""
     @mysql_obj.query("SELECT a.idaccount, a.name_account, a.balance, a.datecreated
     FROM accounts a WHERE a.type_account = 'bolsillos' AND a.iduser = #{@id}  AND a.status_account = 1;").each do |e|
-      message = message + " #{count}.  Nombre #{e["name_account"]} Saldo #{e["balance"]} \n"
+      message = message + " #{count.to_s.rjust(3)} | #{e["name_account"].ljust(20)}           |  #{e["balance"].to_s.rjust(12)} |\n"
       @list_pockets[count] = e["idaccount"].to_i
       @balance_pockets[count]= e["balance"].to_i
       count = count + 1
 
     end
-    puts message
+
+    puts "  id |     Nombre bolsillo            |     Saldo     |",
+         "-----┼--------------------------------┼---------------┼",
+         message
   end
 
 def returnpocket(value)

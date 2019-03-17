@@ -98,7 +98,7 @@ attr_accessor :balance_principal,:balance_mattress
   def movement_history()
     message = ""
     puts  "       Fecha           |         Valor     |          Saldo    |    Descripcion Operacion",
-          "------------------------------------------------------------------------------------------"
+          "-----------------------┼-------------------┼-------------------┼--------------------------"
         @mysql_obj.query("SELECT m.valor, m.balance, m.description, m.datecreated
           FROM movements m WHERE m.idaccount = account_id(#{@id},'ahorros') ORDER BY m.idmovements DESC LIMIT 20;").each do |row|
           message = message + " #{row["datecreated"].to_s[0..-6]}  |  #{row["valor"].to_s.rjust(15)}  |  #{row["balance"].to_s.rjust(15)}  |  #{row["description"]} \n"

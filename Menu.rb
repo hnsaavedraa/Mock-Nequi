@@ -119,9 +119,8 @@ class Menu
       puts "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" ,
            "▒▒▒▒▒ ▒       Mock-Nequi - Bolsillos💰💰💰       ▒ ▒▒▒▒▒" ,
            ""
-      puts  "Bolsillos actuales :"
-            @pockets.listPocket()
-            puts"Que deseas hacer?",
+      puts  @pockets.listPocket(),
+            "Que deseas hacer?",
             "1.Crear Bolsillo",
             "2.Eliminar bolsillo",
             "3.Agregar dinero a bolsillo",
@@ -189,9 +188,9 @@ when"6"
       puts "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" ,
            "▒▒▒▒▒ ▒       Mock-Nequi - Tus Metas 💰💰💰      ▒ ▒▒▒▒▒" ,
            ""
-      puts  "Metas actuales"
-            @goals.listGoal()
-      puts  "Que deseas hacer?",
+      puts   @goals.listGoal(),
+            "",
+            "Que deseas hacer?",
             "1.Crear Meta",
             "2.Cerrar Meta",
             "3.Agregar dinero a meta",
