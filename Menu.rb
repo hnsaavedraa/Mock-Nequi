@@ -98,10 +98,12 @@ class Menu
       when "1"
         puts "Cuando dinero desea ingresar a colchon?"
         value = gets.chomp.to_i
+        @principal.deposit_mattress(value)
         gets.chomp
       when "2"
         puts "Cuando dinero desea sacar del colchon??"
         value = gets.chomp.to_i
+        @principal.retire_mattress(value)
         gets.chomp
       when"9"
         break
