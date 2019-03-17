@@ -55,16 +55,18 @@ class Goal
   def listGoal()
     count = 1
       message = ""
-    @mysql_obj.query("SELECT a.idaccount, a.name_account, a.balance, a.goal_balance
+    @mysql_obj.query("SELECT a.idaccount, a.name_account, a.balance, a.goal_balance, a.goal_date
     FROM accounts a WHERE a.type_account = 'metas' AND a.iduser = #{@id}  AND a.status_account = 1;").each do |e|
-      message = message + " #{count}.  Nombre #{e["name_account"]} Saldo #{e["balance"]} Fecha Limite #{e["goal_date"]} \n"
+      message = message + " #{count.to_s.rjust(3)} | #{e["name_account"].ljust(25)} |  #{e["balance"].to_s.rjust(12)}  | #{e["goal_balance"].to_s.rjust(12)} | #{e["goal_date"]} |\n"
       @list_goals[count] = e["idaccount"].to_i
       @max_goals[count]= e["goal_balance"].to_i
       @balance_goals[count]= e["balance"].to_i
       count = count + 1
 
     end
-    puts message
+    puts "  id |     Nombre Meta           |     abonado    |  Valor meta  |   Limite   |",
+         "-----┼---------------------------┼----------------┼--------------┼------------┼",
+         message
   end
 
 

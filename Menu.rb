@@ -84,7 +84,7 @@ class Menu
       system "clear" or system "cls"
 
       puts "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" ,
-           "▒▒▒▒▒ ▒             Mock-Nequi 💰💰💰            ▒ ▒▒▒▒▒" ,
+           "▒▒▒▒▒ ▒        Mock-Nequi - Colchon💰💰💰        ▒ ▒▒▒▒▒" ,
            ""
       puts  "Guardado en Colchon  :#{@principal.balance_mattress}",
             "",
@@ -98,10 +98,12 @@ class Menu
       when "1"
         puts "Cuando dinero desea ingresar a colchon?"
         value = gets.chomp.to_i
+        @principal.deposit_mattress(value)
         gets.chomp
       when "2"
         puts "Cuando dinero desea sacar del colchon??"
         value = gets.chomp.to_i
+        @principal.retire_mattress(value)
         gets.chomp
       when"9"
         break
@@ -115,12 +117,10 @@ class Menu
       system "clear" or system "cls"
 
       puts "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" ,
-           "▒▒▒▒▒ ▒             Mock-Nequi 💰💰💰            ▒ ▒▒▒▒▒" ,
+           "▒▒▒▒▒ ▒       Mock-Nequi - Bolsillos💰💰💰       ▒ ▒▒▒▒▒" ,
            ""
-      puts  "Ahora esta en tus Bolsillos",
-            "Bolsillos actuales :"
-            @pockets.listPocket()
-            puts"Que deseas hacer?",
+      puts  @pockets.listPocket(),
+            "Que deseas hacer?",
             "1.Crear Bolsillo",
             "2.Eliminar bolsillo",
             "3.Agregar dinero a bolsillo",
@@ -186,12 +186,11 @@ when"6"
       system "clear" or system "cls"
 
       puts "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" ,
-           "▒▒▒▒▒ ▒             Mock-Nequi 💰💰💰            ▒ ▒▒▒▒▒" ,
+           "▒▒▒▒▒ ▒       Mock-Nequi - Tus Metas 💰💰💰      ▒ ▒▒▒▒▒" ,
            ""
-      puts  "Ahora estas en tus metas",
-            "Metas actuales"
-            @goals.listGoal()
-      puts  "Que deseas hacer?",
+      puts   @goals.listGoal(),
+            "",
+            "Que deseas hacer?",
             "1.Crear Meta",
             "2.Cerrar Meta",
             "3.Agregar dinero a meta",
@@ -204,10 +203,27 @@ when"6"
         namegoal = gets.chomp
         puts "ingresa valor de la meta"
         valuegoal = gets.chomp.to_i
+        if valuegoal <= 0
+            puts "debe ingresar un valor valido, presione enter para volver a empezar"
+            gets.chomp
+            next
+        else
+          
+        end
         puts "ingresa fecha limite (formato YYYY-MM-DD)"
         dategoal = gets.chomp
-        @goals.createGoal(namegoal,valuegoal,dategoal)
-        gets.chomp()
+
+        if ( dategoal =~ /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/ and dategoal.length == 10)
+          if Date.parse(dategoal) > Date.today
+              @goals.createGoal(namegoal,valuegoal,dategoal)
+          else
+              puts "La fecha debe ser superior a hoy, presione enter para volver a empezar"
+
+          end
+        else
+            puts "El formado de fecha debe ser YYYY-MM-DD, presione enter para volver a empezar"
+        end
+        gets.chomp()  
       when "2"
         puts "Ingresa el numero de la meta que deseas eliminar"
         @goals.listGoal()
